@@ -1,0 +1,86 @@
+[1;31mWarning: Sections other than main, master, agent, user are deprecated in puppet.conf. Please use the directory environments feature to specify environments. (See http://docs.puppetlabs.com/puppet/latest/reference/environments.html)
+   (at /usr/share/ruby/vendor_ruby/puppet/settings/config_file.rb:77:in `collect')[0m
+[mNotice: Starting Puppet master version 3.6.2[0m
+[0;32mInfo: access[^/catalog/([^/]+)$]: allowing 'method' find[0m
+[0;32mInfo: access[^/catalog/([^/]+)$]: allowing $1 access[0m
+[0;32mInfo: access[^/node/([^/]+)$]: allowing 'method' find[0m
+[0;32mInfo: access[^/node/([^/]+)$]: allowing $1 access[0m
+[0;32mInfo: access[/certificate_revocation_list/ca]: allowing 'method' find[0m
+[0;32mInfo: access[/certificate_revocation_list/ca]: allowing * access[0m
+[0;32mInfo: access[^/report/([^/]+)$]: allowing 'method' save[0m
+[0;32mInfo: access[^/report/([^/]+)$]: allowing $1 access[0m
+[0;32mInfo: access[/file]: allowing * access[0m
+[0;32mInfo: access[/certificate/ca]: adding authentication any[0m
+[0;32mInfo: access[/certificate/ca]: allowing 'method' find[0m
+[0;32mInfo: access[/certificate/ca]: allowing * access[0m
+[0;32mInfo: access[/certificate/]: adding authentication any[0m
+[0;32mInfo: access[/certificate/]: allowing 'method' find[0m
+[0;32mInfo: access[/certificate/]: allowing * access[0m
+[0;32mInfo: access[/certificate_request]: adding authentication any[0m
+[0;32mInfo: access[/certificate_request]: allowing 'method' find[0m
+[0;32mInfo: access[/certificate_request]: allowing 'method' save[0m
+[0;32mInfo: access[/certificate_request]: allowing * access[0m
+[0;32mInfo: access[/v2.0/environments]: allowing 'method' find[0m
+[0;32mInfo: access[/v2.0/environments]: allowing * access[0m
+[0;32mInfo: access[/]: adding authentication any[0m
+[0;32mInfo: Inserting default '/status' (auth true) ACL[0m
+[0;32mInfo: Caching node for ffl-wn-f2ev[0m
+[0;32mInfo: mount[test]: allowing * access[0m
+[0;32mInfo: Caching node for ffl-wn-f2ev[0m
+[mNotice: Compiled catalog for ffl-wn-f2ev in environment production in 0.02 seconds[0m
+[0;32mInfo: Caching node for ffl-wn-f2ev[0m
+[0;32mInfo: Caching node for ffl-wn-f2ev[0m
+[mNotice: Compiled catalog for ffl-wn-f2ev in environment production in 0.01 seconds[0m
+[0;32mInfo: Caching node for ffl-wn-f2ev[0m
+[0;32mInfo: mount[file]: allowing * access[0m
+[0;32mInfo: mount[file]: allowing * access[0m
+[0;32mInfo: mount[file]: allowing * access[0m
+[0;32mInfo: mount[file]: allowing * access[0m
+[0;32mInfo: mount[file]: allowing * access[0m
+[0;32mInfo: mount[file]: allowing * access[0m
+[0;32mInfo: mount[file]: allowing * access[0m
+[0;32mInfo: mount[file]: allowing * access[0m
+[0;32mInfo: Caching node for ffl-wn-f2ev[0m
+[mNotice: Compiled catalog for ffl-wn-f2ev in environment production in 0.01 seconds[0m
+[0;32mInfo: mount[file]: allowing * access[0m
+[0;32mInfo: mount[file]: allowing * access[0m
+[1;31mError: Not authorized to call find on /file_metadata/test/test.txt with {:links=>"manage", :source_permissions=>"use"}[0m
+[0;32mInfo: Caching node for ffl-wn-f2ev[0m
+[0;32mInfo: Caching node for ffl-wn-f2ev[0m
+[mNotice: Compiled catalog for ffl-wn-f2ev in environment production in 0.01 seconds[0m
+[0;32mInfo: Caching node for ffl-wn-f2ev[0m
+[0;32mInfo: Caching node for ffl-wn-f2ev[0m
+[mNotice: Compiled catalog for ffl-wn-f2ev in environment production in 0.01 seconds[0m
+[0;32mInfo: Caching node for ffl-wn-f2ev[0m
+[0;32mInfo: Caching node for ffl-wn-f2ev[0m
+[mNotice: Compiled catalog for ffl-wn-f2ev in environment production in 0.01 seconds[0m
+[0;32mInfo: Caching node for ffl-wn-f2ev[0m
+[0;32mInfo: Caching node for ffl-wn-f2ev[0m
+[mNotice: Compiled catalog for ffl-wn-f2ev in environment production in 0.46 seconds[0m
+[0;32mInfo: Caching node for ffl-wn-f2ev[0m
+[0;32mInfo: Caching node for ffl-wn-f2ev[0m
+[mNotice: Compiled catalog for ffl-wn-f2ev in environment production in 0.01 seconds[0m
+[0;32mInfo: Caching node for ffl-wn-f2ev[0m
+[0;32mInfo: Caching node for ffl-wn-f2ev[0m
+[mNotice: Compiled catalog for ffl-wn-f2ev in environment production in 0.01 seconds[0m
+[0;32mInfo: Caching node for ffl-wn-f2e01v[0m
+[0;32mInfo: Caching node for ffl-wn-f2e01v[0m
+[mNotice: Compiled catalog for ffl-wn-f2e01v in environment production in 0.01 seconds[0m
+[0;32mInfo: Caching node for ffl-wn-f2ev[0m
+[0;32mInfo: Caching node for ffl-wn-f2ev[0m
+[mNotice: Compiled catalog for ffl-wn-f2ev in environment production in 0.01 seconds[0m
+[0;32mInfo: Caching node for ffl-wn-f2ev[0m
+[0;32mInfo: Caching node for ffl-wn-f2ev[0m
+[mNotice: Compiled catalog for ffl-wn-f2ev in environment production in 0.01 seconds[0m
+[0;32mInfo: Caching node for ffl-wn-f2ev[0m
+[0;32mInfo: Caching node for ffl-wn-f2ev[0m
+[mNotice: Compiled catalog for ffl-wn-f2ev in environment production in 0.01 seconds[0m
+[0;32mInfo: Caching node for ffl-wn-f2ev[0m
+[0;32mInfo: Caching node for ffl-wn-f2ev[0m
+[mNotice: Compiled catalog for ffl-wn-f2ev in environment production in 0.01 seconds[0m
+[0;32mInfo: Caching node for ffl-wn-f2ev[0m
+[0;32mInfo: Caching node for ffl-wn-f2ev[0m
+[mNotice: Compiled catalog for ffl-wn-f2ev in environment production in 0.01 seconds[0m
+[0;32mInfo: Caching node for ffl-wn-f2ev[0m
+[0;32mInfo: Caching node for ffl-wn-f2ev[0m
+[mNotice: Compiled catalog for ffl-wn-f2ev in environment production in 0.01 seconds[0m
