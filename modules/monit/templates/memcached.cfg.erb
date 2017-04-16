@@ -1,0 +1,11 @@
+<% memport.each do |var|  %>
+
+check process memcached_<%= var %> with pidfile /var/run/memcached/memcached_<%= var %>.pid
+      group memcached
+      start program = "/etc/init.d/memcached_<%= var %> start"
+      stop program = "/etc/init.d/memcached_<%= var %> stop"
+      if failed host <%= memip %> port <%= var %> protocol MEMCACHE then restart 
+      if cpu > 90% for 3 cycles then restart
+      
+ <% end %>
+

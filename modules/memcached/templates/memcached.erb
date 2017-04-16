@@ -1,0 +1,97 @@
+#! /bin/sh
+#
+# chkconfig:    2345 58 02
+# description:  The memcached daemon is a network memory cache service.
+# processname: memcached
+
+# Source function library.
+. /etc/init.d/functions
+PORT=1<%= myport %>
+USER=nobody
+MAXCONN=30240
+CACHESIZE=<%= ccsz %>
+
+if [ -f /etc/sysconfig/memcached ];then
+        . /etc/sysconfig/memcached
+fi
+
+# Check that networking is up.
+. /etc/sysconfig/network
+
+if [ "$NETWORKING" = "no" ]
+then
+        exit 0
+fi
+
+RETVAL=0
+prog="/usr/local/memcached/bin/memcached"
+
+start () {
+        echo -n $"Starting $prog: "
+        # insure that /var/run/memcached has proper permissions
+    if [ ! -d /var/run/memcached ]; then
+        mkdir -p /var/run/memcached
+    fi
+
+    if [ "`stat -c %U /var/run/memcached`" != "$USER" ]; then
+        chown $USER /var/run/memcached
+    fi
+
+        $prog -v -d -p $PORT -u $USER  -m $CACHESIZE -c $MAXCONN  -P /var/run/memcached/memcached_$PORT.pid
+        RETVAL=$?
+        echo
+        [ $RETVAL -eq 0 ] && touch /var/lock/subsys/memcached_$PORT
+}
+
+stop () {
+        echo -n $"Stopping $prog: "
+    if [ -e /var/run/memcached/memcached_$PORT.pid ] ; then
+        /bin/kill -9 `cat /var/run/memcached/memcached_$PORT.pid`
+        RETVAL=$?
+        echo
+        if [ $RETVAL -eq 0 ] ; then
+            rm -f /var/lock/subsys/memcached_$PORT
+            rm -f /var/run/memcached_$PORT.pid
+        else
+            /bin/kill -9 `/bin/ps ax | grep memcached | grep $PORT |awk '{print $1}'`
+            RETVAL=$?
+            echo
+            if [ $RETVAL -eq 0 ] ; then
+                rm -f /var/lock/subsys/memcached_$PORT
+                rm -f /var/run/memcached_$PORT.pid
+            fi
+        fi
+    else
+            /bin/kill -9 `/bin/ps ax | grep memcached | grep $PORT |awk '{print $1}'`
+            RETVAL=$?
+            echo
+            if [ $RETVAL -eq 0 ] ; then
+                rm -f /var/lock/subsys/memcached_$PORT
+                rm -f /var/run/memcached_$PORT.pid
+            fi
+    fi
+}
+
+restart () {
+        stop
+        start
+}
+
+
+# See how we were called.
+case "$1" in
+  start)
+        start
+        ;;
+  stop)
+        stop
+        ;;
+  restart|reload)
+        restart
+        ;;
+  *)
+        echo $"Usage: $0 {start|stop|restart|reload}"
+        exit 1
+esac
+
+exit $?
