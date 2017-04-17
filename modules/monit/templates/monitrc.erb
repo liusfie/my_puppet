@@ -1,0 +1,33 @@
+set daemon  60              # check services at 1-minute intervals
+set logfile /var/log/monit.log
+set idfile /var/.monit.id
+set statefile /var/.monit.state
+set mailserver mail.fang.com
+set mail-format {
+    from: $HOST@fang.com
+    subject: $SERVICE $EVENT at $DATE
+    message: Monit $ACTION $SERVICE
+    Date: $DATE
+    Host: $HOST
+    Description: $DESCRIPTION
+
+    Yours sincerely,
+    SouFun.com.
+    }
+set alert monitor_alert@fang.com
+<% if has_variable?("alertto") then %>
+<% alertto.each do |var| %>
+set alert  <%= var %>  but not {resource,instance}
+<% end %>
+<% else %>
+set alert fanzhenyuan@fang.com  but not {resource,instance}
+set alert boss@fang.com  but not {resource,instance}
+<% end %>
+
+set httpd port 2812 and
+    use address localhost  # only accept connection from localhost
+    allow localhost        # allow localhost to connect to the server and
+    allow admin:monit
+
+include /usr/local/monit/etc/monit.d/*.cfg
+

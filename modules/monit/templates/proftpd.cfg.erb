@@ -1,0 +1,5 @@
+check process proftpd with pidfile "/usr/local/proftpd/var/proftpd.pid"
+      start program = "/etc/init.d/proftpd start"
+      stop program = "/etc/init.d/proftpd stop"
+      if failed host 127.0.0.1 port 21 then restart
+      if cpu > 90% for 3 cycles then restart

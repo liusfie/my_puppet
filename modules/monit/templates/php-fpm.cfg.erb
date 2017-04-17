@@ -1,0 +1,7 @@
+<% memport.each do |var|  %>
+check process php-fpm_<%= var %> with pidfile "/www/nginx/php-fpm/php-fpm-<%= var %>.pid"
+      start program = "/etc/init.d/php-fpm_<%= var %> start"
+      stop program = "/etc/init.d/php-fpm_<%= var %> stop"
+      if failed host 127.0.0.1 port <%= var %>  then restart 
+      if cpu > 90% for 3 cycles then restart
+<% end %>

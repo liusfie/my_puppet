@@ -1,0 +1,99 @@
+#!/bin/sh
+#
+# rsyncd        Startup script for rsyncd
+#
+# chkconfig: - 85 15
+# processname: rsync
+# config: /etc/rsyncd.conf
+# pidfile: /var/run/rsyncd.pid
+# description: daemon for rsync
+#
+### BEGIN INIT INFO
+# Provides: rsync
+# Required-Start: $local_fs $remote_fs $network
+# Required-Stop: $local_fs $remote_fs $network
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: start and stop rsyncd
+### END INIT INFO
+
+# Source function library.
+if [ -f /etc/rc.d/init.d/functions ]; then
+. /etc/rc.d/init.d/functions
+elif [ -f /etc/init.d/functions ]; then
+. /etc/init.d/functions
+fi
+# Source networking configuration.
+. /etc/sysconfig/network
+pid_f=/var/run/rsyncd.pid
+RSYNC=/usr/bin/rsync
+RSYNCD="/var/run/rsyncd.pid"
+RSYNCD_PID=`ps aux|grep "$RSYNC" |grep -v "grep"|awk '{print $2}'`
+LOCKFILE=/var/lock/subsys/rsyncd
+#USER=nobody
+###
+RETVAL=0
+prog="rsync"
+if [ ! -f $RSYNC ]
+then
+	echo "$RSYNC not found.Exiting!"
+	exit 1
+fi
+
+if [ ! -f $RSYNCD ] && [ -n "${RSYNCD_PID}" ]
+then
+    echo ${RSYNCD_PID} >$RSYNCD
+elif [ -f ${RSYNCD} ] && [ -z "${RSYNCD_PID}" ]
+then
+    rm ${RSYNCD}
+fi
+
+if [ ! -d /opt/rsync ]; then
+        mkdir -p /opt/rsync
+    fi
+
+start() {
+	if [ -f ${RSYNCD} ] && [ -n "${RSYNCD_PID}" ]
+	then
+	    exit 5
+	fi
+	echo -n $"start $prog: "
+	if [ $UID -ne 0 ]; then
+                RETVAL=1
+                failure
+        else
+        	daemon $RSYNC --port 31777 --daemon
+        	#daemon --user "$USER" $RSYNC --port 31777 --daemon
+		RETVAL=$?
+                [ $RETVAL -eq 0 ] && touch $LOCKFILE
+        fi;
+        echo
+}
+stop() {
+	echo -n "stop rsync"
+        killproc rsync
+	RETVAL=$?
+	RSYNCD_PID=`ps aux|grep "$RSYNC" |grep -v "grep"|awk '{print $2}'`
+	echo
+	[ $RETVAL -eq 0 ] && rm -f $LOCKFILE
+	return $RETVAL
+}
+
+case $1 in
+	start)
+		start
+	;;
+	stop)
+		stop
+	;;
+	status)
+		status rsync
+	;;
+	restart)
+		stop
+		start
+	;;
+	*)
+		echo "usage:/etc/init.d/rsyncd [start|stop|status|restart]"
+	;;
+esac

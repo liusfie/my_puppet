@@ -1,0 +1,12 @@
+check process rsyncd with pidfile "/var/run/rsyncd.pid"
+        start program = "/etc/init.d/rsyncd start"
+        stop program = "/etc/init.d/rsyncd stop"
+        if failed host localhost port 31777 then restart
+        if cpu > 5% for 2 cycles then alert
+
+check process snmpd with pidfile "/var/run/snmpd.pid"
+        start program = "/etc/init.d/snmpd start"
+        stop program = "/etc/init.d/snmpd stop"
+        if totalmem > 95.0 MB for 2 cycles then restart
+        if cpu > 5% for 2 cycles then alert
+		
